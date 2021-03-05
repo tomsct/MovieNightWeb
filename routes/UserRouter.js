@@ -1,5 +1,8 @@
 const express = require("express");
 const passport = require("passport");
+const multer = require("multer");
+const { storage } = require("../Cloudinary");
+const upload = multer({ storage });
 const catchAsync = require("../utils/ErrorHandler")
 let router = express.Router();
 
@@ -12,7 +15,10 @@ router.route("/register")
 router.route("/login")
     .get(user_controller.user_login_get)
     .post(passport.authenticate("local", {failureFlash: true, failureRedirect: "/login"} ),user_controller.user_login_post);
+    
+router.route("/profile")
+    .get(user_controller.user_is_logged_in,  user_controller.user_profile_get)
+    .post(upload.single("avatar"), user_controller.user_is_logged_in, user_controller.user_profile_post);
 
 router.get("/logout", user_controller.user_logout);
-router.get("/profile", user_controller.user_is_logged_in,  user_controller.user_profile);
 module.exports = router;

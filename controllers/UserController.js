@@ -39,8 +39,18 @@ exports.user_logout = (req, res, next) => {
     res.redirect("/");
 }
 
-exports.user_profile = (req, res, next) => {
+exports.user_profile_get = (req, res, next) => {
     res.render("users/profile");
+}
+
+exports.user_profile_post = async (req, res, next) => {
+    if(req.file)
+    {
+        let user = await User.findById(req.user._id);
+        user.avatar = req.file.path;
+        await user.save();
+    }
+    res.redirect("/profile");
 }
 
 exports.user_is_logged_in = (req, res, next) => {

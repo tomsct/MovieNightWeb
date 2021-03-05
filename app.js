@@ -14,7 +14,7 @@ const db = mongoose.connection;
 require("dotenv").config();
 
 const sessionConfig = {
-    secret: process.env.SessionSecret,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }
@@ -37,17 +37,17 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
-const mongoDB = process.env.mongoDB;
+const MONGODB = process.env.MONGODB;
 const PORT = process.env.PORT;
 
-mongoose.connect(mongoDB, {
+mongoose.connect(MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-    console.log(`Database connected on : ${mongoDB}`);
+    console.log(`Database connected on : ${MONGODB}`);
 })
 
 app.listen(PORT, () => {

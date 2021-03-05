@@ -1,5 +1,14 @@
 <% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/profile.css">
 
-<h1><%= user.username %></h1>
+<div class="container">
+    <h1><%= user.username %></h1>
+    <% if(user.avatar) %>
+        <img src="<%= user.avatar %>" alt="">
+        
+    <form action="/profile" method="POST" enctype="multipart/form-data">
+        <input class="form-control" type="file" name="avatar" id="avatar">
 
-<input type="file" name="avatar" id="avatar">
+        <button class="btn btn-success">Save</button>
+    </form>
+</div>

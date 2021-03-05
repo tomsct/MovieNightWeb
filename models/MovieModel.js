@@ -3,8 +3,8 @@ const axios = require('axios');
 const AppError = require("../utils/AppError")
 require("dotenv").config();
 
-const OMDBKey = process.env.OMDBKey;
-const YoutubeKey = process.env.YoutubeKey;
+const OMDB_KEY = process.env.OMDB_KEY;
+const YOUTUBE_KEY = process.env.YOUTUBE_KEY;
 
 const movieSchema = new mongoose.Schema({
     Title: {
@@ -47,7 +47,7 @@ const movieSchema = new mongoose.Schema({
 });
 
 movieSchema.statics.GetAndSaveMovie = async (id) => {
-    let movie = await axios.get(`http://www.omdbapi.com/?apikey=${OMDBKey}&i=${id}`);
+    let movie = await axios.get(`http://www.omdbapi.com/?apikey=${OMDB_KEY}&i=${id}`);
     if (movie.data.Response === "False") throw new AppError(movie.data.Error, 400);
 
     movie = new mongoose.model("Movie", movieSchema)(movie.data);
@@ -57,7 +57,7 @@ movieSchema.statics.GetAndSaveMovie = async (id) => {
 }
 
 async function GetTrailer(movie) {
-    let trailerQuery = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${movie.Title.replace(/ /g, "%20")}%20${movie.Year.toString()}%20Trailer&type=video&key=${YoutubeKey}`
+    let trailerQuery = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${movie.Title.replace(/ /g, "%20")}%20${movie.Year.toString()}%20Trailer&type=video&key=${YOUTUBE_KEY}`
     let response = await axios.get(trailerQuery);
 
     if (response.status != 200) throw new AppError(response.statusText, response.status);
