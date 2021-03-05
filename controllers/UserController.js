@@ -39,6 +39,10 @@ exports.user_logout = (req, res, next) => {
     res.redirect("/");
 }
 
+exports.user_profile = (req, res, next) => {
+    res.render("users/profile");
+}
+
 exports.user_is_logged_in = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.originalUrl = req.originalUrl;
