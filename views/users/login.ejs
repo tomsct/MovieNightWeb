@@ -1,0 +1,27 @@
+<% layout("layouts/boilerplate") %>
+
+<script src="/js/ValidateForm.js"></script>
+<link rel="stylesheet" href="/css/login.css">
+    <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">Sign-in</h5>
+          <form action="/login" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="form-label" for="username">Username</label>
+                <input class="form-control" type="text" name="username" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+            </div>
+            <button id="sign-in"class="btn btn-success">Sign-in</button>
+            </form>
+            <hr>
+            <form action="/register" method="GET">
+                <button id="sign-up" class="btn btn-warning">Sign-up</button>
+            </form>
+        </div>
+    </div>
+
+
+

@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/navbar.css">
+
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/img/popcorn.svg" alt="" width="40" height="34" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/movies">Movies</a>
+            </div>
+            <div class="navbar-nav container-fluid justify-content-end">
+                <% if(!user) { %>
+                <a class="nav-link" href="/login">Sign in</a>
+                <% } else { %>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= user.username %>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </div>   
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $(() => {
+        $(".dropdown-toggle").on("click" , () => {
+                $(".dropdown-menu").toggle();
+        });
+    });
+
+    $(() => {
+        $(document).on("click", () => {
+            if($(".dropdown-menu").css("display", "block"))
+                $(".dropdown-menu").toggle();
+        });
+    });
+
+    $(document).ready(() => {
+        $('.nav-link .active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('.nav-link').addClass('active');
+
+        $(".dropdown-toggle").dropdown()
+    });
+</script>

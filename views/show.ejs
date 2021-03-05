@@ -1,0 +1,62 @@
+<% layout("../views/layouts/boilerplate") %>
+
+<link rel="stylesheet" href="/css/starability.css">
+<link rel="stylesheet" href="/css/show.css"> 
+<script src="/js/show.js"></script>
+<script src="/js/ValidateForm.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="//unpkg.com/jscroll/dist/jquery.jscroll.min.js"></script>
+<script>
+    const query = `<%= movie.Title %> <%= movie.Year%>`;
+    var movie =  `<%- JSON.stringify(movie)  %>`;
+    var user = `<%- JSON.stringify(user) %>`
+</script>
+
+<div class="container">
+    <h1>
+        <%= movie.Title %>
+    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <img id="movie-poster" src="<%= movie.Poster %>" alt="">
+            </div>
+            <div class="col-md-8">
+                <div id="trailer">
+                    <iframe width="477" height="268" src="https:youtube.com/embed/<%=movie.TrailerID%>"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <form id="form-back" action="/movies">
+            <input id="btn-back" class="btn btn-dark" type="submit" value="Back" />
+        </form>
+       <button id="btn-download" class="btn btn-success">Download</button>
+
+        <% if(user) { %> 
+            <form id="comments-form" onsubmit="event.preventDefault()" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <fieldset class="starability-basic">
+                        <legend>First rating:</legend>
+                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" class="active" id="first-rate5" name="review[rating]" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>          
+                <div class="mb-3">
+                    <label class="form-label" for="body">Review</label>
+                    <textarea style="resize: none;" class="form-control" name="review [body]" id="body" cols="30" rows="3" required></textarea>
+                </div>
+                <button class="btn btn-primary"     id="btn-submit">Submit</button>
+            </form>
+        <% } %>
+        <div id="comments">
+        </div>
+    </div>
+</div>

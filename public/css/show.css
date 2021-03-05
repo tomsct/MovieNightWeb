@@ -1,0 +1,28 @@
+.accordion-body, #collapseOne,.accordion-button{
+    background-color: white;
+}
+
+.card{
+    margin-top: 10px;
+}
+
+#movie-poster{
+    width: 182px;
+    height: 268px;
+}
+
+h1{
+    text-align: center;
+}
+
+h5{
+    color: black;
+}
+
+p{
+    color: black;
+}
+
+#btn-download, #btn-back, #form-back{
+    display: inline-block;
+}

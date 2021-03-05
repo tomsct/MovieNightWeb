@@ -1,0 +1,20 @@
+.carousel-cell {
+  height: 220px;
+  margin-right: 10px;
+}
+  
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+}
+
+.img-poster {
+  width: 130px;
+  height: 200px;
+  margin: 0px;
+  transition: transform .05s; /* Animation */
+}
+
+.img-poster:hover {
+  transform: scale(1.03);
+}
