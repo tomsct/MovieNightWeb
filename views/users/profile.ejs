@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="/css/profile.css">
 
 <div class="container">
-    <h1><%= user.username %></h1>
+
     <% if(user.avatar) %>
-        <img src="<%= user.avatar %>" alt="">
-        
+        <img id="avatar-img" class="rounded-circle img-responsive center-block d-block mx-auto" src="<%= user.avatar %>" alt="">
+
     <form action="/profile" method="POST" enctype="multipart/form-data">
         <input class="form-control" type="file" name="avatar" id="avatar">
 

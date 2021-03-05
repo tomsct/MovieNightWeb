@@ -11,7 +11,11 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: "MovieNigth",
-        allowedFormats: ["jpeg", "png", "jpg"]
+        allowedFormats: ["jpeg", "png", "jpg"],
+        transformation: [
+            {width: 400, height: 400, gravity: "face", radius: "max", crop: "crop"},
+            {width: 200, crop: "scale"}],
+        format: "png"
     }
 })
 
