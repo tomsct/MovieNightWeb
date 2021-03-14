@@ -1,11 +1,34 @@
-#avatar-nav{
+nav .rounded-circle{
     height: 40px;
     width: 40px;
     display: inline-block;
 }
 
-#navbarDropdown{
+nav .dropdown-toggle{
     display: inline-block;
+}
+
+nav a{
+    width: max-content;
+}
+
+nav div .nav-item.dropdown{
+    width: max-content;
+}
+
+#right-links{
+    width: fit-content;
+}
+
+#search{
+    margin-top: 2px;
+    margin-right: 20px;
+    height: 50%;
+    color: black;
+    border-color: grey;
+    outline:0px ;
+    -webkit-appearance:none;
+    box-shadow: none;
 }
 
 @media (max-width: 575px) {

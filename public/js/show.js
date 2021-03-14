@@ -2,10 +2,24 @@ $(document).ready(async () => {
     movie = JSON.parse(movie);
 
     if(user) user = JSON.parse(user);
-    const torrent = await axios.post("/u/", { query });
+        $.ajax({
+            url: "/u/",
+            type: "POST",
+            data: {
+                query: query
+            },
+            success: (torrent) => {
+                $("#btn-download").on("click", () => {
+                    window.open(torrent, "_blank");
+                })
+            },
+            error: (request, error) => {
+                console.log(error);
+            }
+        })
 
-    $("#btn-download").on("click", () => {
-        window.open(torrent.data, "_blank");
+    $("#btn-back").on("click", () => {
+        location.href = "/movies";
     })
 
     $("#btn-submit").on("click", async (event) => {
@@ -15,12 +29,22 @@ $(document).ready(async () => {
             rating: $("fieldset > input[type=radio].active").val()
         }   
 
-        const response = await axios.post(`/m/${movie.imdbID}/reviews`, { review });
-
-        if (response.status == 200) {
-            AppendComment(response.data);
-            $("#body").val("");
-        }
+        $.ajax({
+            url: `/m/${movie.imdbID}/reviews`,
+            type: "POST",
+            data:{
+                review: review
+            },
+            dataType: "JSON",
+            success: (response) => {
+                console.log(response);
+                AppendComment(response);
+                $("#body").val("");
+            },
+            error: (request, error) => {
+                console.log(error);
+            }
+        })
     });
         
     $("fieldset > input[type=radio]").on("click", (e) => {
@@ -30,8 +54,9 @@ $(document).ready(async () => {
         $(e.target).addClass("active");
     })
 
-    for (let review of movie.Reviews)
+    for(let review of movie.Reviews)
         AppendComment(review);
+
 })
 
 const AppendComment = (review) => {
@@ -44,14 +69,28 @@ const AppendComment = (review) => {
     let reviewBody = $("<div></div>");
     if(user && review.author === user._id)
     {
-        let button = $("<button>").addClass("btn btn-danger").text("DELETE");
-    
+        let button = $("<button>").addClass("btn btn-danger");
+        button.append(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>`)
+
         button.on("click", async (event) => {
             event.preventDefault();
-            const res = await axios.delete(`/m/${movie.imdbID}/reviews/${review._id}`);
-    
-            if (res.status == 200)
-                $(`#${review._id}`).remove();
+        
+            $.ajax({
+                url: `/m/${movie.imdbID}/reviews/${review._id}/`,
+                type: "DELETE",
+                data: {
+                    _id: review._id
+                },
+                success: (res) => {
+                    
+                    $(`#${res._id}`).remove();
+                },
+                error: (request, error) => {
+                    console.log(error);
+                }
+            })
         })
         reviewBody.append(reviewRating, paragraph, button);
     }else

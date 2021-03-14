@@ -48,6 +48,7 @@ const movieSchema = new mongoose.Schema({
 
 movieSchema.statics.GetAndSaveMovie = async (id) => {
     let movie = await axios.get(`http://www.omdbapi.com/?apikey=${OMDB_KEY}&i=${id}`);
+
     if (movie.data.Response === "False") throw new AppError(movie.data.Error, 400);
 
     movie = new mongoose.model("Movie", movieSchema)(movie.data);

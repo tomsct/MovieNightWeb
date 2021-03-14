@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="/css/carousel.css">
 
-<div class="container">
-    <div class="carousel" data-flickity='{ "percentPosition": false ,"wrapAround": true , "pageDots": false}'>
-        <% for(let movie of movies) { %>
-            <div class="carousel-cell">
-                <a href="m/<%= movie.imdbID %>">
-                    <img src="<%= movie.Poster %>" class="img-poster">
-                </a>
-            </div>
-            <% } %>
-    </div>
+<div class="carousel" data-flickity='{ "percentPosition": false ,"wrapAround": true , "pageDots": false}'>
+    <% for(let movie of movies) { %>
+        <div class="carousel-cell">
+            <a href="m/<%= movie.imdbID %>">
+                <img src="<%= movie.Poster %>" class="img-poster">
+            </a>
+        </div>
+ <% } %>
 </div>

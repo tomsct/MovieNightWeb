@@ -2,9 +2,9 @@
 
 <link rel="stylesheet" href="/css/starability.css">
 <link rel="stylesheet" href="/css/show.css"> 
+<script src="/js/ejs.js"></script>
 <script src="/js/show.js"></script>
 <script src="/js/ValidateForm.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="//unpkg.com/jscroll/dist/jquery.jscroll.min.js"></script>
 <script>
     const query = `<%= movie.Title %> <%= movie.Year%>`;
@@ -28,10 +28,8 @@
             </div>
         </div>
 
-        <form id="form-back" action="/movies">
-            <input id="btn-back" class="btn btn-dark" type="submit" value="Back" />
-        </form>
-       <button id="btn-download" class="btn btn-success">Download</button>
+        <button id="btn-back" class="btn btn-dark">Back</button>
+        <button id="btn-download" class="btn btn-success">Download</button>
 
         <% if(user) { %> 
             <form id="comments-form" onsubmit="event.preventDefault()" class="needs-validation" novalidate>
@@ -53,9 +51,10 @@
                     <label class="form-label" for="body">Review</label>
                     <textarea style="resize: none;" class="form-control" name="review [body]" id="body" cols="30" rows="3" required></textarea>
                 </div>
-                <button class="btn btn-primary"     id="btn-submit">Submit</button>
+                <button class="btn btn-primary" id="btn-submit">Submit</button>
             </form>
         <% } %>
+        
         <div id="comments">
         </div>
     </div>

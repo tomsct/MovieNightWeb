@@ -66,6 +66,7 @@ app.use("/", require("./routes/UserRouter"));
 app.use("/movies", require("./routes/MoviesRouter"));
 app.use("/m", require("./routes/MovieRouter"));
 app.use("/u", require("./routes/UtilsRouter"));
+app.use("/s", require("./routes/SearchRouter"));
 
 app.all("*", (req, res, next) => {
     next(new AppError("Page not found", 404));

@@ -1,7 +1,3 @@
-.accordion-body, #collapseOne,.accordion-button{
-    background-color: white;
-}
-
 .card{
     margin-top: 10px;
 }
@@ -15,14 +11,16 @@ h1{
     text-align: center;
 }
 
-h5{
-    color: black;
-}
-
 p{
     color: black;
 }
 
 #btn-download, #btn-back, #form-back{
     display: inline-block;
+}
+
+@media (max-width: 767px) {
+    #trailer {
+      display: none;
+    }
 }

@@ -14,16 +14,22 @@
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/movies">Movies</a>
             </div>
-            <div class="navbar-nav container-fluid justify-content-end">
+            <div class="container-fluid align-self-center">
+                <form  id="search-form" class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                </form>
+            </div>
+            <div id="right-links" class="navbar-nav container-fluid justify-content-end">
                 <% if(!user) { %>
                 <a class="nav-link" href="/login">Sign in</a>
                 <% } else { %>
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%= user.username %>
                         </a>
                         <% if(user.avatar) %>
-                        <img class="rounded-circle" id="avatar-nav" src="<%= user.avatar %>" alt="">
+                        <img class="rounded-circle" src="<%= user.avatar %>" alt="">
+
                         <div class="dropdown-menu dropdown-menu-end">
                           <a class="dropdown-item" href="/profile">Profile</a>
                           <a class="dropdown-item" href="#">Another action</a>
@@ -56,5 +62,10 @@
         $('a[href="' + location.pathname + '"]').closest('.nav-link').addClass('active');
 
         $(".dropdown-toggle").dropdown()
+    });
+
+    $("#search-form").on("submit", (e) => {
+        e.preventDefault();
+        location.href = `/s/${$("#search").val()}`;
     });
 </script>
