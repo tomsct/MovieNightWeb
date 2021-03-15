@@ -1,14 +1,32 @@
 <% layout("layouts/boilerplate") %>
 <link rel="stylesheet" href="/css/profile.css">
 
-<div class="container">
-    <div class="card">
-        <% if(user.avatar) %>
-            <img id="avatar-img" class="rounded-circle img-responsive center-block d-block mx-auto" src="<%= user.avatar %>" alt="">
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card w-50">
+        <div class="card-body">
+            <div class="row">
+                <h5 class="card-title text-center">Profile</h5>
 
-        <form action="/profile" method="POST" enctype="multipart/form-data">
-            <input class="form-control" type="file" name="avatar" id="avatar">
-            <button class="btn btn-success">Save</button>
-        </form>
+                <div class="col-8 text-center my-auto">
+                        <input class="form-control" type="file" name="avatar" id="avatar">
+                </div>
+
+                <div class="col-4">
+                    <% if(user.avatar) %>
+                    <img id="avatar-img" class="rounded-circle img-responsive mx-auto" src="<%= user.avatar %>" alt="">
+                </div>
+                
+                <div class="row">
+                    <div class="col text-center">
+                        <button  type="submit" class="btn btn-success">Save</button>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn btn-danger">Cancel</button> 
+                    </div>
+                </div>
+            </div> 
+        </div>
     </div>
 </div>
+
+<!-- <form action="/profile" method="POST" enctype="multipart/form-data"></form> -->
