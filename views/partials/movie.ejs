@@ -1,13 +1,8 @@
-<div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="<%= movie.Poster %>" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><a href="/m/<%= movie.imdbID %>"><%= movie.Title %></a></h5>
-          <p class="card-text"><%= movie.Plot %></p>
-        </div>
-      </div>
-    </div>
+<div class="result">
+  <td>
+    <img src="<%= movie.Poster %>" class="card-img" alt="...">
+  </td>
+  <td>
+    <a href="/m/<%= movie.imdbID %>"><%= movie.Title %> (<%= movie.Year %>)</a>
+  </td>
 </div>

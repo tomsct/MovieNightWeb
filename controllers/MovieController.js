@@ -8,7 +8,6 @@ exports.movie_details = async (req, res, next) => {
     if (!exists)
         await Movie.GetAndSaveMovie(id);
 
-
     Movie.findOne({ imdbID: id }, (err, movie) => {
         if (err) throw new AppError(err.status, err.message);
 

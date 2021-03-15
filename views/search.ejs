@@ -2,7 +2,11 @@
 
 <link rel="stylesheet" href="/css/search.css">
 <div class="container">
-    <% for(let movie of movies) { %> 
-        <%- include("partials/movie", { movie }) %>
-    <% } %>
+    <div class="card">
+        <ul>
+            <% for(let movie of movies) { %> 
+                    <%- include("partials/movie", { movie }) %>
+            <% } %>
+        </ul>
+    </div>
 </div>

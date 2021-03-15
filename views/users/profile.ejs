@@ -2,13 +2,13 @@
 <link rel="stylesheet" href="/css/profile.css">
 
 <div class="container">
+    <div class="card">
+        <% if(user.avatar) %>
+            <img id="avatar-img" class="rounded-circle img-responsive center-block d-block mx-auto" src="<%= user.avatar %>" alt="">
 
-    <% if(user.avatar) %>
-        <img id="avatar-img" class="rounded-circle img-responsive center-block d-block mx-auto" src="<%= user.avatar %>" alt="">
-
-    <form action="/profile" method="POST" enctype="multipart/form-data">
-        <input class="form-control" type="file" name="avatar" id="avatar">
-
-        <button class="btn btn-success">Save</button>
-    </form>
+        <form action="/profile" method="POST" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="avatar" id="avatar">
+            <button class="btn btn-success">Save</button>
+        </form>
+    </div>
 </div>
